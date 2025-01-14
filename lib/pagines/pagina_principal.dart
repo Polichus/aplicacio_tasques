@@ -1,3 +1,4 @@
+import 'package:aplicacio_tasques/components/dialog_nova_tasca.dart';
 import 'package:aplicacio_tasques/components/item_tasca.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +22,19 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     });
   }
 
-  void accioEsborrarTasca(int posLista){
+  void accioEsborrarTasca(int posLista) {
     setState(() {
       tasquesLlista.removeAt(posLista);
     });
+  }
+
+  void crearNovaTasca() {
+    showDialog(
+      context: context,
+      builder: (context){
+        return const DialogNovaTasca();
+      },
+    );
   }
 
   @override
@@ -43,7 +53,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal[300],
         shape: const CircleBorder(),
-        onPressed: () {},
+        onPressed: crearNovaTasca,
         child: Icon(
           Icons.add,
           color: Colors.orange[200],
