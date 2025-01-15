@@ -16,6 +16,22 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     {"titol": "Tasca 3", "valor": false},
   ];
 
+  TextEditingController tecTextTasca = TextEditingController();
+
+  void accioGuardar(){
+    setState(() {
+      tasquesLlista.add({
+        "titol": tecTextTasca.text,
+        "valor": false,
+      });
+    });
+    accioCancerlar();
+  }
+  void accioCancerlar(){
+    Navigator.of(context).pop();
+    tecTextTasca.clear();
+  }
+
   void canviaCheckbox(int posLista) {
     setState(() {
       tasquesLlista[posLista]["valor"] = !tasquesLlista[posLista]["valor"];
@@ -31,8 +47,12 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
   void crearNovaTasca() {
     showDialog(
       context: context,
-      builder: (context){
-        return const DialogNovaTasca();
+      builder: (context) {
+        return DialogNovaTasca(
+          tecTextTasca: tecTextTasca,
+          accioGuardar: accioGuardar,
+          accioCancerlar: accioCancerlar,
+        );
       },
     );
   }
